@@ -1,0 +1,44 @@
+/* Carousel improvements */
+.carousel {
+  background: #f8f9fa;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 50px;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.carousel:hover .carousel-control-prev,
+.carousel:hover .carousel-control-next {
+  opacity: 1;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Thumbnail gallery styling */
+.thumbnail-item {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.thumbnail-item:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.img-thumbnail {
+  border: 2px solid #ddd !important;
+  padding: 2px !important;
+  transition: all 0.3s ease;
+}
+
+.thumbnail-item:hover .img-thumbnail {
+  border: 2px solid #007bff !important;
+}
+

@@ -1,0 +1,16 @@
+/* Site custom styles for a cleaner professional look */
+body {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: #f7f9fc;
+}
+.property-card { border: none; border-radius: .6rem; overflow: hidden; box-shadow: 0 6px 18px rgba(15,23,42,.06); }
+.property-image { height: 220px; object-fit: cover; width: 100%; }
+.property-badge { position: absolute; left: 12px; top: 12px; padding: .35rem .6rem; background: rgba(0,123,255,.95); color:#fff; border-radius: .35rem; font-size: .85rem; }
+.property-price { font-size: 1.15rem; font-weight: 700; color: #1f2937; }
+.card .card-body h5 { font-size: 1.05rem; margin-bottom: .25rem; }
+.navbar-brand { font-weight: 700; letter-spacing: .2px; }
+.card.shadow-sm { box-shadow: 0 6px 18px rgba(15,23,42,.06); }
+.btn-primary { background: linear-gradient(90deg,#0d6efd,#0069d9); border: none; }
+
+/* Responsive spacing for hero */
+.hero { padding-top: 3rem; padding-bottom: 3rem; }
