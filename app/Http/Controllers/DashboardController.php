@@ -18,7 +18,7 @@ class DashboardController extends Controller
             $data = [
                 'totalProducts'    => Produk::count(),
                 'totalOrders'      => Pesanan::count(),
-                'pendingShipment'  => Pesanan::where('status', 'proses')->count(),
+                'pendingShipment'  => Pesanan::where('status', 'dibayar')->count(),
                 'completedOrders' => Pesanan::where('status', 'selesai')->count(),
             ];
         } else {

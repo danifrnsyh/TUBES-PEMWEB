@@ -71,12 +71,14 @@
               <td>
                 @if($o->status == 'pending')
                   <span class="badge rounded-pill bg-warning-subtle text-warning border border-warning px-3 py-2">Menunggu</span>
-                @elseif($o->status == 'confirmed')
-                  <span class="badge rounded-pill bg-info-subtle text-info border border-info px-3 py-2">Dikonfirmasi</span>
-                @elseif($o->status == 'shipped')
+                @elseif($o->status == 'dibayar')
+                  <span class="badge rounded-pill bg-info-subtle text-info border border-info px-3 py-2">Dibayar</span>
+                @elseif($o->status == 'dikirim')
                   <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary px-3 py-2">Dikirim</span>
-                @elseif($o->status == 'delivered')
+                @elseif($o->status == 'selesai')
                   <span class="badge rounded-pill bg-success-subtle text-success border border-success px-3 py-2">Selesai</span>
+                @elseif($o->status == 'dibatalkan')
+                  <span class="badge rounded-pill bg-danger-subtle text-danger border border-danger px-3 py-2">Dibatalkan</span>
                 @endif
               </td>
               <td class="text-end">

@@ -130,10 +130,11 @@
               @csrf
               <label class="form-label small fw-bold">Update Status Pesanan</label>
               <select name="status" class="form-select mb-3">
-                <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Menunggu (Pending)</option>
-                <option value="confirmed" {{ $order->status == 'confirmed' ? 'selected' : '' }}>Dikonfirmasi (Confirmed)</option>
-                <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Dikirim (Shipped)</option>
-                <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Terkirim/Selesai (Delivered)</option>
+                <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Menunggu Pembayaran</option>
+                <option value="dibayar" {{ $order->status == 'dibayar' ? 'selected' : '' }}>Sudah Dibayar / Diproses</option>
+                <option value="dikirim" {{ $order->status == 'dikirim' ? 'selected' : '' }}>Sedang Dikirim</option>
+                <option value="selesai" {{ $order->status == 'selesai' ? 'selected' : '' }}>Selesai / Terkirim</option>
+                <option value="dibatalkan" {{ $order->status == 'dibatalkan' ? 'selected' : '' }}>Dibatalkan</option>
               </select>
               <button type="submit" class="btn btn-primary w-100 shadow-sm">
                 Perbarui Status
