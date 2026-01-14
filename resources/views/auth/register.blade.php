@@ -33,7 +33,7 @@
               <label class="form-label fw-600">Daftar Sebagai</label>
               <select name="role" class="form-control">
                 <option value="buyer">Pembeli (beli produk)</option>
-                <option value="pegawai">Pegawai (kelola toko)</option>
+                <option value="seller">Penjual (kelola toko)</option>
               </select>
             </div>
             <button class="btn btn-success w-100 fw-600">Daftar & Masuk</button>

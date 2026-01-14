@@ -43,6 +43,7 @@ class PesananController extends Controller
             'metode_pembayaran' => $request->input('metode_pembayaran'),
         ]);
 
+        // Create pesanan item
         PesananItem::create([
             'pesanan_id' => $pesanan->id,
             'produk_id' => $produk->id,

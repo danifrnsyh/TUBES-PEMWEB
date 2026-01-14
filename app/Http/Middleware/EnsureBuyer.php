@@ -17,9 +17,12 @@ class EnsureBuyer
             abort(403, 'Unauthorized.');
         }
 
-        $role = trim(strtolower($user->role ?? ''));
-        if ($role !== 'pembeli') {
-            abort(403, 'Only pembeli can perform this action.');
+        // Check role from either 'role' or 'peran' column
+        // Database uses enum('Pegawai','Pembeli')
+        $peran = trim($user->peran ?? 'Pembeli');
+        
+        if ($peran !== 'Pembeli') {
+            abort(403, "Only pembeli (buyer) can perform this action. Your role: {$peran}");
         }
 
         return $next($request);

@@ -110,13 +110,14 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|min:6',
-            'role' => 'required|in:buyer,pegawai'
+            'role' => 'required|in:buyer,seller'
         ]);
 
         // Build attributes dynamically depending on users table schema
         $attributes = [
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => $data['role'], // Store directly as 'buyer' or 'seller'
         ];
 
         // name vs nama
@@ -125,14 +126,6 @@ class AuthController extends Controller
         }
         if (\Illuminate\Support\Facades\Schema::hasColumn('users', 'name')) {
             $attributes['name'] = $data['name'];
-        }
-
-        // role vs peran
-        if (\Illuminate\Support\Facades\Schema::hasColumn('users', 'peran')) {
-            $attributes['peran'] = $data['role'] === 'pegawai' ? 'Pegawai' : 'Pembeli';
-        }
-        if (\Illuminate\Support\Facades\Schema::hasColumn('users', 'role')) {
-            $attributes['role'] = $data['role'] === 'pegawai' ? 'seller' : 'buyer';
         }
 
         $user = User::create($attributes);

@@ -85,9 +85,9 @@
           @php 
             $userRole = auth()->user()->role;
             $role = trim(strtolower($userRole));
-            $isPegawai = in_array($role, ['pegawai', 'admin']);
+            $isSeller = in_array($role, ['seller', 'pegawai', 'admin']);
           @endphp
-          @if($isPegawai)
+          @if($isSeller)
             <div class="row g-2">
               <div class="col-md-6">
                 <a href="{{ route('pegawai.produk.edit', $produk) }}" class="btn btn-warning btn-lg w-100">
@@ -130,11 +130,16 @@
   </div>
 
   <!-- Related Products -->
-  @if($produk->kategori && $produk->kategori->produks()->where('id', '!=', $produk->id)->count() > 0)
+  @php
+    $relatedProducts = $produk->kategori 
+      ? $produk->kategori->produks()->where('id', '!=', $produk->id)->limit(4)->get() 
+      : collect();
+  @endphp
+  @if($produk->kategori && count($relatedProducts) > 0)
     <div class="mt-5 pt-5 border-top">
       <h3 class="mb-4">Produk Serupa</h3>
       <div class="row g-4">
-        @foreach($produk->kategori->produks()->where('id', '!=', $produk->id)->limit(4)->get() as $related)
+        @foreach($relatedProducts as $related)
           <div class="col-md-6 col-lg-3">
             <div class="product-card">
               <img src="{{ $related->gambar_utama ? asset('storage/'.$related->gambar_utama) : 'https://via.placeholder.com/400x300' }}" 

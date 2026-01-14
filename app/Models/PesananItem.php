@@ -24,6 +24,22 @@ class PesananItem extends Model
         'bukti',
     ];
 
+    protected $guarded = [];
+
+    public static function createSafe($data)
+    {
+        try {
+            return self::create($data);
+        } catch (\Exception $e) {
+            // If produk_id column doesn't exist, remove and retry
+            if (isset($data['produk_id']) && strpos($e->getMessage(), 'produk_id') !== false) {
+                unset($data['produk_id']);
+                return self::create($data);
+            }
+            throw $e;
+        }
+    }
+
     public function pesanan()
     {
         return $this->belongsTo(Pesanan::class, 'pesanan_id');
