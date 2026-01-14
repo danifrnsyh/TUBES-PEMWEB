@@ -184,7 +184,7 @@
     /* Headings */
     h1, h2, h3, h4, h5, h6 {
       font-weight: 700;
-      color: var(--text-dark);
+      color: var(--text-main);
     }
 
     h1 {
@@ -216,22 +216,25 @@
 
     /* Form controls */
     .form-control, .form-select {
-      border: 1px solid var(--light-gray);
-      border-radius: 4px;
-      padding: 0.7rem 1rem;
-      font-weight: 500;
-      transition: border-color 0.2s;
+      border: 1px solid #CACACA; /* More visible border */
+      border-radius: 8px;
+      padding: 0.8rem 1.2rem;
+      font-weight: 400;
+      transition: all 0.2s ease;
+      background-color: white;
     }
 
     .form-control:focus, .form-select:focus {
-      border-color: var(--primary-blue);
-      box-shadow: 0 0 0 3px rgba(0,81,186,0.1);
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+      outline: none;
     }
 
     .form-label {
       font-weight: 600;
-      color: var(--text-dark);
-      margin-bottom: 0.5rem;
+      color: var(--text-main);
+      margin-bottom: 0.6rem;
+      font-size: 0.9rem;
     }
 
     /* Tables */
@@ -240,9 +243,9 @@
     }
 
     .table thead {
-      background-color: var(--accent-gray);
+      background-color: var(--border-color);
       font-weight: 600;
-      color: var(--text-dark);
+      color: var(--text-main);
     }
 
     .table tbody tr {
@@ -365,7 +368,7 @@
         </div>
         <div class="col-md-3 mb-4">
           <h5>Kontak</h5>
-          <p>Email: info@furniturestore.com<br>
+          <p>Email: threed@furniturestore.com<br>
           Telepon: +62 812 3456 7890</p>
         </div>
       </div>

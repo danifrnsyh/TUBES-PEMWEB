@@ -61,7 +61,13 @@ class User extends Authenticatable
 
     public function orders()
     {
+        // Legacy Property System relationship - pointing to non-existent 'orders' table
         return $this->hasMany(Order::class, 'buyer_id');
+    }
+
+    public function pesanans()
+    {
+        return $this->hasMany(Pesanan::class, 'pembeli_id');
     }
 
     public function sellerOrders()

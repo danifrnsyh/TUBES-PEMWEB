@@ -1,82 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD Pegawai</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <style>
-        body { background: #f8f9fa; }
-        table thead { background-color: #0d6efd; color: #fff; }
-        table tbody tr:hover { background-color: #e9f5ff; }
-        .btn-icon i { margin-right: 5px; }
-    </style>
-</head>
-<body class="p-4">
+@extends('layouts.app')
 
-<div class="container">
-    <h1 class="text-center text-primary mb-4">CRUD Pegawai</h1>
+@section('content')
+<style>
+  .admin-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+  }
+  .table-admin thead th {
+    background-color: #FBFBFB;
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.2rem 1rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+  }
+  .table-admin tbody td {
+    padding: 1.2rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .action-btn {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+  }
+</style>
 
-    <div class="mb-3 d-flex justify-content-between flex-wrap gap-2">
-        <a href="{{ route('dashboard.index') }}" class="btn btn-secondary btn-icon">
-            <i class="bi bi-house-door-fill"></i> Dashboard
-        </a>
-        <a href="{{ route('pegawai.create') }}" class="btn btn-success btn-icon">
-            <i class="bi bi-plus-circle-fill"></i> Tambah Pegawai
-        </a>
-    </div>
-
-    <table class="table table-hover table-bordered shadow-sm bg-white">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nama Pegawai</th>
-                <th>Jabatan</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($pegawais as $pegawai)
-            <tr>
-                <td>{{ $pegawai->id }}</td>
-                <td>{{ $pegawai->nama }}</td>
-                <td>{{ $pegawai->jabatan }}</td>
-                <td class="d-flex gap-1">
-                    <a href="{{ route('pegawai.show', $pegawai->id) }}" class="btn btn-sm btn-dark btn-icon">
-                        <i class="bi bi-eye-fill"></i> Detail
-                    </a>
-                    <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn btn-sm btn-warning btn-icon">
-                        <i class="bi bi-pencil-fill"></i> Edit
-                    </a>
-                    <form action="{{ route('pegawai.destroy', $pegawai->id) }}" method="POST" class="d-inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-danger btn-icon" onclick="return confirm('Hapus pegawai ini?')">
-                            <i class="bi bi-trash-fill"></i> Hapus
-                        </button>
-                    </form>
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td colspan="4" class="text-center text-muted">Data Pegawai belum tersedia.</td>
-            </tr>
-            @endforelse
-        </tbody>
-    </table>
+<div class="row mb-5 align-items-center">
+  <div class="col-md-8 text-center text-md-start">
+    <h1 class="display-6 fw-bold mb-1">Manajemen Tim</h1>
+    <p class="text-muted mb-0">Kelola staf dan jabatan di Three D Furniture.</p>
+  </div>
+  <div class="col-md-4 text-center text-md-end mt-4 mt-md-0">
+    <a href="{{ route('pegawai.create') }}" class="btn btn-primary shadow-sm px-4">
+      <i class="bi bi-person-plus-fill me-2"></i> Tambah Pegawai
+    </a>
+  </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script>
-    @if(session('success'))
-        toastr.success('{{ session('success') }}', 'Berhasil');
-    @elseif(session('error'))
-        toastr.error('{{ session('error') }}', 'Gagal');
-    @endif
-</script>
-
-</body>
-</html>
+<div class="admin-card">
+  <div class="table-responsive">
+    <table class="table table-admin mb-0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nama Lengkap</th>
+          <th>Jabatan</th>
+          <th class="text-end">Opsi</th>
+        </tr>
+      </thead>
+      <tbody>
+        @forelse($pegawais as $pegawai)
+          <tr class="align-middle">
+            <td><span class="text-muted small">#{{ $pegawai->id }}</span></td>
+            <td>
+              <div class="fw-bold text-dark">{{ $pegawai->nama }}</div>
+            </td>
+            <td>
+              <span class="badge bg-light text-dark border px-3 py-2 fw-500 rounded-pill">{{ $pegawai->jabatan }}</span>
+            </td>
+            <td class="text-end">
+              <div class="d-flex justify-content-end gap-2">
+                <a href="{{ route('pegawai.show', $pegawai->id) }}" class="btn btn-light action-btn border" title="Detail">
+                  <i class="bi bi-eye-fill small"></i>
+                </a>
+                <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn btn-light action-btn border" title="Edit">
+                  <i class="bi bi-pencil-fill small"></i>
+                </a>
+                <form action="{{ route('pegawai.destroy', $pegawai->id) }}" method="POST" class="d-inline"
+                      onsubmit="return confirm('Hapus pegawai ini?')">
+                  @csrf @method('DELETE')
+                  <button type="submit" class="btn btn-light action-btn border text-danger" title="Hapus">
+                    <i class="bi bi-trash3-fill small"></i>
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        @empty
+          <tr>
+            <td colspan="4" class="text-center py-5 text-muted">
+              Belum ada data pegawai terdaftar.
+            </td>
+          </tr>
+        @endforelse
+      </tbody>
+    </table>
+  </div>
+</div>
+@endsection
