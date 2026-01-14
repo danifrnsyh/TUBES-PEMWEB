@@ -7,20 +7,21 @@
   <title>THREE D - Toko Furniture Online Terpercaya</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="{{ asset('css/carousel.css') }}" rel="stylesheet">
   <style>
     :root {
-      --primary-blue: #0051BA;
-      --secondary-yellow: #FFCC00;
-      --accent-gray: #F5F5F5;
-      --dark-gray: #1A1A1A;
-      --light-gray: #EBEBEB;
-      --text-dark: #2C2C2C;
+      --primary-blue: #1A1A1A; /* Minimalist Charcoal */
+      --accent-gold: #D4AF37;   /* Elegant Gold focus */
+      --background-light: #FAFAFA;
+      --text-main: #2D2D2D;
+      --text-muted: #666666;
+      --border-color: #EEEEEE;
+      --card-shadow: 0 4px 20px rgba(0,0,0,0.05);
     }
 
     * {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Outfit', sans-serif;
     }
 
     html, body {
@@ -28,231 +29,137 @@
     }
 
     body {
-      background-color: #FFFFFF;
-      color: var(--text-dark);
+      background-color: var(--background-light);
+      color: var(--text-main);
       display: flex;
       flex-direction: column;
+      -webkit-font-smoothing: antialiased;
     }
 
     main {
       flex: 1;
-      padding: 3rem 0 2rem 0;
+      padding: 0;
     }
 
-    /* Navbar - IKEA Style */
+    /* Navbar - Premium Minimalist */
     .navbar {
-      background-color: #FFFFFF;
-      border-bottom: 1px solid var(--light-gray);
-      padding: 1rem 0;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.2rem 0;
+      transition: all 0.3s ease;
     }
 
     .navbar-brand {
       font-weight: 700;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       color: var(--primary-blue) !important;
-      letter-spacing: -1px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     .navbar-brand i {
       margin-right: 0.5rem;
-      color: var(--secondary-yellow);
+      color: var(--accent-gold);
     }
 
     .nav-link {
-      color: var(--text-dark) !important;
+      color: var(--text-main) !important;
       font-weight: 500;
-      font-size: 0.95rem;
-      transition: color 0.2s ease;
-      margin: 0 0.8rem;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      margin: 0 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      opacity: 0.8;
     }
 
     .nav-link:hover {
-      color: var(--primary-blue) !important;
+      color: var(--accent-gold) !important;
+      opacity: 1;
     }
 
     .dropdown-menu {
-      border: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--card-shadow);
+      border-radius: 12px;
+      padding: 0.8rem;
     }
 
     .dropdown-item {
       font-weight: 500;
-      color: var(--text-dark);
-      transition: background-color 0.2s;
+      border-radius: 8px;
+      padding: 0.6rem 1rem;
+      margin-bottom: 2px;
     }
 
-    .dropdown-item:hover {
-      background-color: var(--accent-gray);
-      color: var(--primary-blue);
-    }
-
-    /* Cards - IKEA Minimalist */
+    /* Cards - Minimalist */
     .card {
-      border: none;
+      border: 1px solid var(--border-color);
       background-color: #FFFFFF;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-      border-radius: 8px;
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      box-shadow: var(--card-shadow);
+      border-radius: 16px;
+      transition: transform 0.3s ease;
     }
 
-    .card:hover {
-      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-      transform: translateY(-2px);
-    }
-
-    .card-header {
-      background-color: var(--primary-blue);
-      color: white;
-      border: none;
-      border-radius: 8px 8px 0 0;
+    /* Buttons - Professional */
+    .btn {
+      padding: 0.8rem 1.8rem;
+      border-radius: 100px;
       font-weight: 600;
-      padding: 1.2rem;
-    }
-
-    .card-body {
-      padding: 1.5rem;
-    }
-
-    /* Buttons - IKEA Bold */
-    .btn-primary {
-      background-color: var(--primary-blue);
-      border: none;
-      font-weight: 600;
-      padding: 0.7rem 1.5rem;
-      border-radius: 4px;
-      transition: background-color 0.2s ease;
-    }
-
-    .btn-primary:hover {
-      background-color: #003D99;
-      border-color: #003D99;
-    }
-
-    .btn-secondary {
-      background-color: var(--light-gray);
-      color: var(--text-dark);
-      border: none;
-      font-weight: 600;
-      padding: 0.7rem 1.5rem;
-      border-radius: 4px;
-      transition: background-color 0.2s ease;
-    }
-
-    .btn-secondary:hover {
-      background-color: #DCDCDC;
-      color: var(--text-dark);
-    }
-
-    /* Product Cards */
-    .product-card {
-      border: none;
-      background: #FFFFFF;
-      border-radius: 8px;
-      overflow: hidden;
       transition: all 0.3s ease;
     }
 
-    .product-card:hover {
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      transform: translateY(-4px);
+    .btn-primary {
+      background-color: var(--primary-blue);
+      border: none;
+      color: white;
     }
 
-    .product-image {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-      background: var(--accent-gray);
+    .btn-primary:hover {
+      background-color: #333;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
 
-    .product-info {
-      padding: 1.5rem;
-    }
-
-    .product-name {
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: var(--text-dark);
-      margin-bottom: 0.8rem;
-      min-height: 2.4rem;
-    }
-
-    .product-sku {
-      font-size: 0.85rem;
-      color: #999;
-      margin-bottom: 0.8rem;
-    }
-
-    .product-price {
-      font-weight: 700;
-      font-size: 1.4rem;
+    .btn-secondary {
+      background-color: white;
       color: var(--primary-blue);
-      margin-bottom: 1rem;
+      border: 1px solid var(--border-color);
     }
 
-    .stock-badge {
-      display: inline-block;
-      padding: 0.4rem 0.8rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-
-    .stock-badge.in-stock {
-      background-color: #E8F5E9;
-      color: #2E7D32;
-    }
-
-    .stock-badge.low-stock {
-      background-color: #FFF3E0;
-      color: #E65100;
-    }
-
-    .stock-badge.out-of-stock {
-      background-color: #FFEBEE;
-      color: #C62828;
-    }
-
-    /* Footer - IKEA Clean */
+    /* Footer - Sleek */
     footer {
-      background-color: var(--dark-gray);
-      color: #FFFFFF;
-      padding: 3rem 0 0;
+      background-color: #FFFFFF;
+      color: var(--text-main);
+      padding: 4rem 0 0;
       margin-top: auto;
-      border-top: 1px solid var(--light-gray);
+      border-top: 1px solid var(--border-color);
     }
 
     footer h5 {
       font-weight: 700;
-      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       margin-bottom: 1.5rem;
-      color: var(--secondary-yellow);
+      color: var(--primary-blue);
     }
 
     footer a {
-      color: rgba(255,255,255,0.7);
-      text-decoration: none;
+      color: var(--text-muted);
       transition: color 0.2s;
     }
 
     footer a:hover {
-      color: var(--secondary-yellow);
-    }
-
-    footer p {
-      color: rgba(255,255,255,0.7);
-      font-size: 0.95rem;
-      line-height: 1.6;
+      color: var(--accent-gold);
     }
 
     .footer-bottom {
-      background-color: #0D0D0D;
-      padding: 1.5rem 0;
+      padding: 2rem 0;
+      border-top: 1px solid var(--border-color);
       text-align: center;
-      color: rgba(255,255,255,0.6);
-      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
     }
 
     /* Alerts */
