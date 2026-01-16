@@ -53,6 +53,59 @@
     object-fit: cover;
   }
 
+  /* Carousel controls styling (improved visibility) */
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 56px;
+    height: 56px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: rgba(0,0,0,0.55);
+    border: none;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.12s ease, transform 0.12s ease;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+  }
+  .carousel-control-prev:hover,
+  .carousel-control-next:hover {
+    background: rgba(0,0,0,0.75);
+    transform: translateY(-50%) scale(1.05);
+  }
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    /* Use white inline SVG icons for consistent contrast */
+    filter: none;
+    background-size: 28px 28px;
+    background-image: none !important;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+  }
+  .carousel-control-prev-icon::after,
+  .carousel-control-next-icon::after {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .carousel-control-prev-icon::after {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23fff" viewBox="0 0 16 16"><path d="M11.354 1.646a.5.5 0 0 1 0 .708L6.707 7l4.647 4.646a.5.5 0 0 1-.708.708l-5-5a.5.5 0 0 1 0-.708l5-5a.5.5 0 0 1 .708 0z"/></svg>');
+  }
+  .carousel-control-next-icon::after {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23fff" viewBox="0 0 16 16"><path d="M4.646 1.646a.5.5 0 0 0 0 .708L9.293 7 4.646 11.646a.5.5 0 1 0 .708.708l5-5a.5.5 0 0 0 0-.708l-5-5a.5.5 0 0 0-.708 0z"/></svg>');
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 576px) {
+    .carousel-control-prev, .carousel-control-next { width: 44px; height: 44px; }
+  }
+
   /* Right Side Info */
   .product-meta-top {
     font-size: 0.85rem;
@@ -139,6 +192,16 @@
               </div>
             @endforeach
           </div>
+
+          <!-- Carousel controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#produkCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#produkCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
         
         <div class="thumbnail-list">
@@ -312,16 +375,39 @@
 </div>
 
 <script>
-  function carouselGoto(index, el) {
-    const carousel = document.getElementById('produkCarousel');
-    if (carousel) {
-      const carouselInstance = bootstrap.Carousel.getOrCreateInstance(carousel);
-      carouselInstance.to(index);
-      
-      // Update thumbnails active state
-      document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
-      el.classList.add('active');
+  (function(){
+    const carouselEl = document.getElementById('produkCarousel');
+
+    function setActiveThumb(index) {
+      const thumbs = Array.from(document.querySelectorAll('.thumb-item'));
+      thumbs.forEach((t,i) => t.classList.toggle('active', i === index));
+      const active = thumbs[index];
+      if (active) active.scrollIntoView({behavior: 'smooth', inline: 'center', block: 'nearest'});
     }
-  }
+
+    window.carouselGoto = function(index, el) {
+      if (!carouselEl) return;
+      const carouselInstance = bootstrap.Carousel.getOrCreateInstance(carouselEl);
+      carouselInstance.to(index);
+      if (el) {
+        document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+        el.classList.add('active');
+        el.scrollIntoView({behavior: 'smooth', inline: 'center', block: 'nearest'});
+      } else {
+        setActiveThumb(index);
+      }
+    }
+
+    if (carouselEl) {
+      carouselEl.addEventListener('slid.bs.carousel', function(e){
+        const items = Array.from(carouselEl.querySelectorAll('.carousel-item'));
+        const activeIndex = items.indexOf(e.relatedTarget);
+        setActiveThumb(activeIndex);
+      });
+
+      // Ensure initial state
+      setActiveThumb(0);
+    }
+  })();
 </script>
 @endsection
