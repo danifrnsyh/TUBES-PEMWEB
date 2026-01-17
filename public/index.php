@@ -11,10 +11,10 @@ if (file_exists($maintenance = __DIR__.'/laravel_app/storage/framework/maintenan
 }
 
 // autoload composer
-require __DIR__.'/laravel_app/vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 // bootstrap laravel
-$app = require_once __DIR__.'/laravel_app/bootstrap/app.php';
+$app = require_once __DIR__.'/../bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
 
